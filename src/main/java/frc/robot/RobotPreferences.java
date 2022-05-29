@@ -7,7 +7,6 @@ import edu.wpi.first.math.util.Units;
 public final class RobotPreferences {
 
     public static final class pref_SwerveModule {
-
         public static final SN_DoublePreference wheelRadius = new SN_DoublePreference(
                 "wheelRadius", Units.inchesToMeters(1.5));
         public static final SN_DoublePreference encoderCountsPerRotation = new SN_DoublePreference(

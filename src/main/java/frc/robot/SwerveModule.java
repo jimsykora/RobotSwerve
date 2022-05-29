@@ -45,6 +45,19 @@ public class SwerveModule {
     private final SimpleMotorFeedforward turnFeedforward = new SimpleMotorFeedforward(
             turnFeedforwardS.getValue(), turnFeedforwardV.getValue());
 
+    //
+    // From SDS MK4 Product Page
+    // L1 - Standard: 8.14 : 1
+    // L2 - Fast: 6.75 : 1
+    // L3 - Very Fast: 6.12 : 1
+    // L4 - Too Fast: 5.14 : 1
+    //
+
+    static final double gearingL1 = 8.14;
+    static final double gearingL2 = 6.75;
+    static final double gearingL3 = 6.12;
+    static final double gearingL4 = 5.14;
+
     /**
      * Creates Swerve Module with Drive Encoder
      * 
@@ -79,12 +92,10 @@ public class SwerveModule {
     }
 
     public double getDriveEncoderPosition() {
-        return driveMotor.getSelectedSensorPosition()
-                * (2 * Math.PI * wheelRadius.getValue() / encoderCountsPerRotation.getValue());
-    }
 
-    public double getTurnEncoderPosition() {
-        return turnEncoder.get();
+        return driveMotor.getSelectedSensorPosition()
+                * (2 * Math.PI * wheelRadius.getValue() / encoderCountsPerRotation.getValue())
+                * gearingL2;
     }
 
     /**
@@ -93,15 +104,22 @@ public class SwerveModule {
      * @return rate of drive encoder in meters per second
      */
     private double getDriveEncoderRate() {
+
         double rate = driveMotor.getSelectedSensorVelocity(); // sensor units per 100ms
 
         rate *= 10; // sensor units per second
 
-        rate /= encoderCountsPerRotation.getValue(); // rotations per second
+        rate /= encoderCountsPerRotation.getValue(); // motor rotations per second
+
+        rate *= gearingL2; // wheel rotations per second
 
         rate *= (2 * Math.PI * wheelRadius.getValue()); // meters per second
 
         return rate;
+    }
+
+    public double getTurnEncoderPosition() {
+        return turnEncoder.get();
     }
 
     /**
