@@ -9,6 +9,7 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.SwerveModule;
@@ -48,6 +49,9 @@ public class Drivetrain extends SubsystemBase {
         BACK_LEFT_TURN_ENCODER_A, BACK_LEFT_TURN_ENCODER_B);
     backRight = new SwerveModule(BACK_RIGHT_DRIVE, BACK_RIGHT_TURN,
         BACK_RIGHT_TURN_ENCODER_A, BACK_RIGHT_TURN_ENCODER_B);
+
+    
+    //AnalogInput leftFront = new AnalogInput(FRONT_LEFT_STEER_ABS_ENCODER);
 
     driveConfig = new TalonFXConfiguration();
     turnConfig = new TalonFXConfiguration();
@@ -114,5 +118,8 @@ public class Drivetrain extends SubsystemBase {
 
     SmartDashboard.putNumber("Back Right Drive Encoder Position", backRight.getDriveEncoderPosition());
     SmartDashboard.putNumber("Back Right Turn Encoder Position", backRight.getDriveEncoderPosition());
+
+    //SmartDashboard.putNumber("LF Turn Encoder", leftFront.;
+
   }
 }

@@ -18,6 +18,8 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.Encoder;
 import static frc.robot.RobotPreferences.pref_SwerveModule.*;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+
 /** Swerve Module Class */
 public class SwerveModule {
 
